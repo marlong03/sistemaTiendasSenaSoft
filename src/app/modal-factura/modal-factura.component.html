@@ -1,0 +1,189 @@
+<style>
+    .container__btns{
+        background-color: #ededed;
+        display: flex;
+        justify-content:space-between;
+        align-items: center;
+        padding:5px 40px;
+
+
+    }
+    .container__table{
+        padding:30px
+    }
+   
+    .tbody tr:hover{
+        background-color: #ededed;
+        cursor: pointer;
+
+    }
+
+    /* MODAL */
+    .modal {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  padding-top: 100px; /* Location of the box */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgb(0,0,0); /* Fallback color */
+  background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+
+/* Modal Content */
+.modal-content {
+  background-color: #fefefe;
+  margin: auto;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 80%;
+}
+
+/* The Close Button */
+.close {
+  color: #aaaaaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+  color: #000;
+  text-decoration: none;
+  cursor: pointer;
+}
+    /* MODAL */
+.container__form{
+  width:90%;
+}
+.hr_color{
+    border: 3px solid #4180d8;
+    background-color: #4180d8;
+}
+    
+</style>
+
+<section>
+    
+    <div class="container__btns">
+        <div>
+            <h2>holaaa</h2>
+        </div>
+       
+    </div>
+  
+
+    <div #myModal class="modal"name="myModal" [style.display]="modalDisplay">
+
+        <div class="modal-content ">
+          <div class="d-flex justify-content-end mx-3 mt-0 mb-0 ">
+            <span class="close" (click)="cerrarDisplay() ">&times;</span>
+          </div>
+          <div class="">
+            <div class="d-flex flex-column justify-content-center mb-3">
+<div class="d-flex justify-content-center ">
+
+    <h2> Factura</h2>
+</div>
+<hr class="hr_color">
+<div class="d-flex justify-content-center">
+    <h2>Lista Productos</h2>
+</div>
+              <div class="container__table">
+
+                <table class="table table-sm">
+                    <thead>
+                      <tr>
+                        <th scope="col">Nombre</th>
+                        <th scope="col">Cantidad</th>
+                        <th scope="col">Categoria</th>
+                        <th scope="col">Precio(Und)</th>
+                        <th scope="col">Precio total</th>
+                      </tr>
+                    </thead>
+                    <tbody class="tbody" >
+                      <tr>
+                          <td>gato</td>
+                          <td><input type="number" class="w-25"value="1"></td>
+                          <td>Animales</td>
+                          <td>12000</td>
+                          <td>6000000</td>
+                      </tr>
+                      <tr>
+                        <td>perro</td>
+                        <td><input type="number" class="w-25" value="1"></td>
+                        <td>Animales</td>
+                        <td>12000</td>
+                        <td>1200000</td>
+                    </tr><tr>
+                        <td>loro</td>
+                        <td><input type="number" class="w-25" value="1"></td>
+                        <td>Animales</td>
+                        <td>12000</td>
+                        <td>120000</td>
+                    </tr><tr>
+                        <td>raton</td>
+                        <td><input type="number" class="w-25" value="1"></td>
+                        <td>Animales</td>
+                        <td>12000</td>
+                        <td>12000</td>
+                    </tr>
+                    </tbody>
+                    <tfoot>
+                        <tr>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td>Total:</td>
+                            <td>9999999999</td>
+                        </tr>
+                    </tfoot>
+                  </table>
+                    <form class="mt-3">
+                        <div class="d-flex justify-content-center">
+                            <h2>Datos Cliente</h2>
+                        </div>
+                        <div class="row m-3">
+                          <div class="col">
+                            <input type="text"  class="form-control" placeholder="Nombre"  name="nombre">
+                          </div>
+                          <div class="col">
+                            <input type="text" class="form-control" placeholder="Telefono" name="telefono">
+
+                          </div>
+                          <div class="col">
+                            <input type="text" class="form-control" placeholder="Correo"  name="correo">
+                          </div>
+                        </div>
+          
+                        <div class="row m-3">
+                          <div class="col">
+                            <input type="text" class="form-control" placeholder="Direccion"  name="direccion">
+
+                          </div>
+                          <div class="col">
+                            <input type="text" class="form-control" placeholder="Numero identificacion"  name="numeroIdentificacion">
+                          </div>
+                        </div>
+                        <div class="row m-1 d-flex justify-content-center">
+                            <input type="button" value="Crear Factura" class="w-50 btn btn-success">
+                            <input class="m-1 mt-0 mb-0 btn btn-warning w-25"type="button" value="Borrador" >
+                        </div>
+                      </form>
+                </div>
+                </div>
+            <div class="d-flex justify-content-end">
+
+            </div>
+
+           
+          </div>
+        </div>
+      
+      </div>
+
+</section>    
