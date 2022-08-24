@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { AppComponent } from './app.component';
-import { CrudComponent } from './crud/crud.component';
+import { CrudProductosComponent } from './crud/crudProductos/crudProductos.component';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { DashboardEmpleadoSucursalComponent } from './dashboard-empleado-sucursal/dashboard-empleado-sucursal.component';
@@ -10,12 +10,15 @@ import { DashboardEmpleadoBodegaComponent } from './dashboard-empleado-bodega/da
 import { RouterModule, Routes } from '@angular/router';
 import { HomeComponent } from './home/home.component';
 import { ModalFacturaComponent } from './modal-factura/modal-factura.component';
+import { CrudCategoriasComponent } from './crud/crudCategorias/crudCategorias.component';
+import { CrudProveedoresComponent } from './crud/crudProveedores/crudProveedores.component';
 const routes:Routes = [
   
   {
     path:"",
     component:HomeComponent
   },
+
   {
     path:"dashboardbodega",
     component:DashboardEmpleadoBodegaComponent
@@ -29,7 +32,12 @@ const routes:Routes = [
 @NgModule({
   declarations: [
     AppComponent,
-    CrudComponent,
+    CrudProductosComponent,
+    CrudCategoriasComponent,
+    CrudProveedoresComponent,
+
+
+    
     DashboardEmpleadoSucursalComponent,
     DashboardEmpleadoBodegaComponent,
     HomeComponent,

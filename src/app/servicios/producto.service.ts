@@ -26,9 +26,8 @@ export class ProductoService {
     );
   }
   putProducto(id:any,data:any){
- 
     this.http.put('https://sioca2.azurewebsites.net/Prueba1/Producto/editar/'+ id, data)
-      .subscribe(data => console.log(data)
+      .subscribe(data => {console.log(data);this.getProductos();}
     );
   }
    

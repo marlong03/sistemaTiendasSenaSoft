@@ -1,0 +1,57 @@
+<section>
+    <div class="container__btns">
+        <div>
+            <h2>{{nombreBtnSeleccionado.toUpperCase()}}</h2>
+        </div>
+        <div class="">
+    <!--         <input type="button" [disabled]="true"  name="borrar"class="btn btn-danger m-2"value="{{palabraBorrar}}" (click)="borrarProveedors()"  >
+            <input type="button"  class="btn btn-primary m-2"value="{{palabraActualizar}}" name="{{palabraActualizar}}" (click)="abrirModalProveedors($event)">
+            <input type="button"  class="btn btn-success m-2"value="{{palabraAgregar}}" name="{{palabraAgregar}}" (click)="abrirModalProveedors($event) "> -->
+        </div>
+    </div>
+    <div class="container__table table-responsive " >
+        <table class="table table-sm">
+            <thead>
+              <tr>
+                <th scope="col">Id</th>
+                <th scope="col">Nombre</th>
+                <th scope="col">Telefono</th>
+                <th scope="col">Correo</th>
+                <th scope="col">Direccion</th>
+                <th scope="col">Tipo identificacion</th>
+                <th scope="col">Numero documento</th>
+
+                
+              </tr>
+            </thead>
+            <tbody class="tbody" (click)="seleccionarProveedorProId($event)">
+              <tr *ngFor="let p of listaProveedors">
+                  <td>{{p.id}}</td>
+                  <td>{{p.nombre}}</td>
+                  <td>{{p.telefono}}</td>
+                  <td>{{p.correo}}</td>
+                  <td>{{p.direccion}}</td>
+                  <td>{{p.idTipo.tipo}}</td>
+                  <td>{{p.numeroIdentificacion}}</td>
+
+
+              </tr>
+            </tbody>
+          </table>
+    </div>
+    <div #myModal class="modal" [style.display]="modalDisplay">
+         <div class="modal-content">
+          <div class="d-flex justify-content-end mx-3 mt-0 mb-0">
+            <span class="close" (click)="cerrarDisplay() ">&times;</span>
+          </div>
+          <div class="">
+            <div class="d-flex justify-content-center mb-3">
+              <h2> Proveedor</h2>
+            </div>
+            <div class="d-flex justify-content-end">
+            </div>
+          </div>
+        </div>
+      </div>
+
+</section>    

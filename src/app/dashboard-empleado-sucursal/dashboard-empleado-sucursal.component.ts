@@ -13,17 +13,10 @@ export class DashboardEmpleadoSucursalComponent implements OnInit {
   palabraFiltrado:string = "a";
   listaProductosMostrar:any = [];
   /* no me muestra la lista de productos sinque ocuyrra una accion primero */
-hacerAlgo(){
-
-  alert("dad")
-}
-
-  
-
   cambiarLista(){
   let lista = this.listaProductos.filter((x:any) => (x.nombre).toLowerCase().includes(this.palabraFiltrado))    
       console.log(this.palabraFiltrado);
-        this.listaProductosMostrar = lista; 
+      this.listaProductosMostrar = lista; 
   }
   abrirModal(e:any){
     this.modalDisplay = 'block';

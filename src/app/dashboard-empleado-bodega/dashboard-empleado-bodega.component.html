@@ -6,7 +6,6 @@
       <h1>INVENTARIO</h1>
     </div>
     <div>
-      <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQn2AEbM7ydqbtg3YNDf_5Kv-c2GslnA_-hcw&usqp=CAU" alt="">
     </div>
   
   </header>
@@ -16,7 +15,6 @@
         <div class="container__profile">
           <img src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png" alt="">
           <h5>Empleado Bodega </h5>
-  
         </div>
         <div class="container__actions">
           <input type="button" class="btn btn-warning"value="Categoria" (click)="cambiarNombreBtnSeleccionado('categoria')">
@@ -25,7 +23,21 @@
         </div>
       </section>
       <section class="section__right">
-        <app-crud [nombreBtnSeleccionado] = "nombreBtnSeleccionado"></app-crud>
+        <div *ngIf="nombreBtnSeleccionado=='productos'">
+
+          <app-crud-productos [nombreBtnSeleccionado] = "nombreBtnSeleccionado"></app-crud-productos>
+        </div>
+
+        <div *ngIf="nombreBtnSeleccionado=='categoria'">
+
+          <app-crud-categorias [nombreBtnSeleccionado] = "nombreBtnSeleccionado"></app-crud-categorias>
+        </div>
+        <div *ngIf="nombreBtnSeleccionado=='proveedores'">
+
+          <app-crud-proveedores [nombreBtnSeleccionado] = "nombreBtnSeleccionado"></app-crud-proveedores>
+        </div>
+       
+
       </section>
     </section>
   </main>

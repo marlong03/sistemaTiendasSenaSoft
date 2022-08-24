@@ -1,13 +1,12 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { ProductoService } from '../servicios/producto.service';
+import { CategoriaService } from '../../servicios/categoria.service';
 @Component({
-  selector: 'app-crud',
-  templateUrl: './crud.component.html',
-  styleUrls: ['./crud.component.css']
+  selector: 'app-crud-categorias',
+  templateUrl: './crudCategorias.component.html',
+  styleUrls: ['./crudCategorias.component.css']
 })
-export class CrudComponent implements OnInit {
+export class CrudCategoriasComponent implements OnInit {
   @Input() nombreBtnSeleccionado:string; 
-  listaProductos:any = [];
   listaCategorias:any = [];
   listaProovedores:any = [];
   
@@ -17,19 +16,19 @@ export class CrudComponent implements OnInit {
   palabraAccionModal:any;
 
 /* ------------------ */
-  constructor(private productoService: ProductoService ) { }
+  constructor(private Categoriaservice: CategoriaService ) { }
   ngOnInit(): void {
-    this.listaProductos = this.productoService.getProductos().subscribe((x:any)=>this.listaProductos = x)
+    this.listaCategorias = this.Categoriaservice.getCategorias().subscribe((x:any)=>this.listaCategorias = x)
   }
 /* ------------------ */
   abrir = false; 
   modalDisplay = 'none';
-  abrirModalProducto(e:any){
+  abrirModalCategorias(e:any){
     this.modalDisplay = 'block';
     console.log(e.target.defaultValue);
     this.palabraAccionModal = e.target.defaultValue;
     if(this.palabraAccionModal == this.palabraActualizar){
-      this.listaProductos.filter((x:any) => {
+      this.listaCategorias.filter((x:any) => {
         if(x.id == this.idSeleccionado){
           this.nombre= x.nombre;
           this.proveedor = x.idProveedor.nombre;  
@@ -39,11 +38,10 @@ export class CrudComponent implements OnInit {
         }
       });
     }
-
   }
   cerrarDisplay(){
     this.modalDisplay = 'none';
-    console.log(this.listaProductos);
+    console.log(this.listaCategorias);
     if(this.palabraAccionModal == this.palabraActualizar){
       this.nombre= "";
           this.proveedor = "";  
@@ -51,7 +49,6 @@ export class CrudComponent implements OnInit {
           this.precioUnd = ""; 
           this.categoria = "";  
     }
-    
   }
 /* ------------------ */
   nombre:string = ""; 
@@ -61,7 +58,7 @@ export class CrudComponent implements OnInit {
   categoria:string = ""; 
 
   ff(){
-    localStorage.setItem("ultimoProducto",JSON.stringify(
+    localStorage.setItem("ultimoCategorias",JSON.stringify(
       { 
         id: 0,
         nombre: this.nombre,
@@ -79,45 +76,34 @@ export class CrudComponent implements OnInit {
     );
   }
   rellenarCamposLocalStorage(){
-    let prod = JSON.parse(localStorage.getItem("ultimoProducto") || "[]");  
+    let prod = JSON.parse(localStorage.getItem("ultimoCategorias") || "[]");  
     console.log(prod);
     this.nombre = prod.nombre
-    this.cantidad = prod.cantidad
-    this.precioUnd = prod.precioUnidad
-    this.categoria = prod.idCategoria
-    this.proveedor = prod.idProveedor
+ 
     }
-      guardarProducto(){
+      guardarCategorias(){
     let data = {
       id: 0,
-      nombre: this.nombre,
-      cantidad:parseInt(this.cantidad),
-      idCategoria:{
-        id: 1
-      },
-      idProveedor:{
-        id: 1
-      },
-      precioUnidad: parseInt(this.precioUnd),
-      precioTotal: (parseInt(this.precioUnd) * parseInt(this.cantidad)),
+      categoria: this.nombre
+       
     }
     try {
-      this.productoService.postProducto(data);
+      this.Categoriaservice.postCategoria(data);
       console.log("data enviada");
     } catch (error) {
       console.log("no enviado");
       console.log(error);
     }
-    localStorage.removeItem("ultimoProducto");
+    localStorage.removeItem("ultimoCategorias");
   }
 /* ------------------ */
   idSeleccionado:number;
-  seleccionarProductoProId(e:any){
+  seleccionarCategoriaProId(e:any){
     this.idSeleccionado = parseInt(e.path[1].childNodes[0].innerHTML);
     console.log(e.path[1].childNodes[0].innerHTML);
   }
   /* Actualizar */
-  actualizarProducto(){
+  actualizarCategorias(){
     let data = {
       id: 10,
       nombre: this.nombre,
@@ -132,7 +118,7 @@ export class CrudComponent implements OnInit {
       precioTotal: (parseInt(this.precioUnd) * parseInt(this.cantidad)),
     }
     try {
-      this.productoService.putProducto(this.idSeleccionado,data);
+      this.Categoriaservice.putCategoria(this.idSeleccionado,data);
       console.log("data enviada y actualizada");
     } catch (error) {
       console.log("no enviado");
@@ -140,21 +126,21 @@ export class CrudComponent implements OnInit {
       console.log(error);
     }
   }
-  borrarProducto(){
+  borrarCategorias(){
     try{
-      this.productoService.deleteProducto(this.idSeleccionado)
-      alert("Se elimino un producto exitosamente!")
+      this.Categoriaservice.deleteCategoria(this.idSeleccionado)
+      alert("Se elimino un Categorias exitosamente!")
     }catch(e){
-      console.log("no pudimos eliminar el producto");
+      console.log("no pudimos eliminar el Categorias");
       console.log(e);
     }
   }
   accionarCallback(){
     if(this.palabraAccionModal == this.palabraActualizar){
-      this.actualizarProducto();
+      this.actualizarCategorias();
     }
     else if(this.palabraAccionModal == this.palabraAgregar){
-      this.guardarProducto();
+      this.guardarCategorias();
     }
   }
   
