@@ -37,17 +37,15 @@
         <form class="text-light">
           <div class="form-group">
             <label for="exampleInputEmail1">Correo</label>
-            <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
+            <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email" [(ngModel)]="email" name="email">
           </div>
           <div class="form-group">
             <label for="exampleInputPassword1">Contraseña</label>
-            <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Contraseña">
+            <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Contraseña" [(ngModel)]="password" name="password">
           </div>
           <br>
-    
           <div class="d-flex justify-content-center">
-    
-            <button type="submit" class="btn btn-light m-2">Iniciar Sesion</button>
+            <button type="button" class="btn btn-light m-2" (click)="iniciarSesion()">Iniciar Sesion</button>
           </div>
         </form>
       </div>

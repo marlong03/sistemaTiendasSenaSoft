@@ -11,7 +11,12 @@ export class ProductoService {
    }
    getProductos():any{
     return this.http.get("https://sioca2.azurewebsites.net/Prueba1/Producto/listar");
-
+   }
+   getProductoPorId(id:any){
+    return this.http.get("https://sioca2.azurewebsites.net/Prueba1/Producto/listarId/"+id);
+   }
+   getUltimoIdProductos():any{
+    return this.http.get("https://sioca2.azurewebsites.net/Prueba1/Producto/idMaximo");
    }
    postProducto(data:Producto){
     this.http

@@ -70,15 +70,12 @@
 <section>
     
     <div class="container__btns">
-        <div>
+       <!--  <div>
             <h2>holaaa</h2>
-        </div>
+        </div> -->
        
     </div>
-  
-
     <div #myModal class="modal"name="myModal" [style.display]="modalDisplay">
-
         <div class="modal-content ">
           <div class="d-flex justify-content-end mx-3 mt-0 mb-0 ">
             <span class="close" (click)="cerrarDisplay() ">&times;</span>
@@ -86,7 +83,6 @@
           <div class="">
             <div class="d-flex flex-column justify-content-center mb-3">
 <div class="d-flex justify-content-center ">
-
     <h2> Factura</h2>
 </div>
 <hr class="hr_color">
@@ -99,91 +95,99 @@
                     <thead>
                       <tr>
                         <th scope="col">Nombre</th>
-                        <th scope="col">Cantidad</th>
+                       <!--  <th scope="col">Cantidad</th> -->
                         <th scope="col">Categoria</th>
                         <th scope="col">Precio(Und)</th>
                         <th scope="col">Precio total</th>
                       </tr>
                     </thead>
                     <tbody class="tbody" >
-                      <tr>
-                          <td>gato</td>
-                          <td><input type="number" class="w-25"value="1"></td>
-                          <td>Animales</td>
-                          <td>12000</td>
-                          <td>6000000</td>
-                      </tr>
-                      <tr>
-                        <td>perro</td>
-                        <td><input type="number" class="w-25" value="1"></td>
-                        <td>Animales</td>
-                        <td>12000</td>
-                        <td>1200000</td>
-                    </tr><tr>
-                        <td>loro</td>
-                        <td><input type="number" class="w-25" value="1"></td>
-                        <td>Animales</td>
-                        <td>12000</td>
-                        <td>120000</td>
-                    </tr><tr>
-                        <td>raton</td>
-                        <td><input type="number" class="w-25" value="1"></td>
-                        <td>Animales</td>
-                        <td>12000</td>
-                        <td>12000</td>
-                    </tr>
+                      <tr *ngFor="let p of listaProductosFactura">
+                          <td>{{p.nombre}}</td>
+                          <!-- <td><input type="number" class="w-25" value=1 #ina (keyup)="getIna(ina.value)" ></td> -->
+                          <td>{{p.idCategoria.categoria}}</td>
+                          <td>${{p.precioUnidad}}</td>
+                          <td>${{multiplicarPrecioUndPorCantidad(p.precioUnidad,1)}}</td>
+                         <!--  <td>revisar</td> -->
+                        </tr>
+                      
                     </tbody>
                     <tfoot>
                         <tr>
                             <td></td>
                             <td></td>
-                            <td></td>
+                           <!--  <td></td> -->
                             <td>Total:</td>
-                            <td>9999999999</td>
+                            <td>${{precioTotal}}</td>
                         </tr>
                     </tfoot>
+                    
                   </table>
-                    <form class="mt-3">
+                  <div *ngIf="listaProductosFacturaLocalStorageExiste.length > 0 ">
+                    <input class="m-1 mt-0 mb-0 btn btn-warning w-25"type="button" (click)="mostrarProductosBorrador()"value="Borrador" >
+                  </div>
+                  <div class="container_sucursales m-3" (keyup)="validacionCamposEnviarFactura()">
+                    <div class="d-flex justify-content-center">
+                      <h2 >Seleccione Sucursal</h2>
+                    </div>
+                    <select class="form-select m-2" aria-label="Default select example" [(ngModel)]="sucursal" name="sucursal">
+                      
+                      <option *ngFor="let s of listaSucursales"value={{s.id}}>{{s.id}} | {{s.direccion}}</option>
+                    </select>
+                  </div>
+                  <section class="tipoCliente">
+                    <div class="d-flex justify-content-center">
+                      <h2>Tipo Cliente</h2>
+                  </div>
+                  <div class="d-flex justify-content-center">
+                    <input type="button" value="Cliente Nuevo" class="btn btn-primary m-1" (click)="tipoCliente('nuevo')">
+                    <input type="button" value="Cliente Existente" class="btn btn-success m-1"(click)="tipoCliente('existente')" >
+                  </div>
+                  </section>
+                  
+                    <form class="mt-2" (keyup)="validacionCamposEnviarFactura()">
                         <div class="d-flex justify-content-center">
-                            <h2>Datos Cliente</h2>
+                            <h2 >Datos Cliente</h2>
                         </div>
-                        <div class="row m-3">
-                          <div class="col">
-                            <input type="text"  class="form-control" placeholder="Nombre"  name="nombre">
-                          </div>
-                          <div class="col">
-                            <input type="text" class="form-control" placeholder="Telefono" name="telefono">
-
-                          </div>
-                          <div class="col">
-                            <input type="text" class="form-control" placeholder="Correo"  name="correo">
+                        <div class="SectiontipoClienteExistente" *ngIf="tipoClienteString == 'existente'">
+                          <div class="col m-2">
+                            <input type="text" class="form-control" placeholder="Numero identificacion"  name="numeroIdentificacion"[(ngModel)]="numeroIdentificacion">
                           </div>
                         </div>
-          
-                        <div class="row m-3">
-                          <div class="col">
-                            <input type="text" class="form-control" placeholder="Direccion"  name="direccion">
-
+                        <div class="SectiontipoClienteNuevo" *ngIf="tipoClienteString == 'nuevo'">
+                          <div class="row m-2">
+                            <div class="col">
+                              <input type="text"  class="form-control" placeholder="Nombre"  name="nombre"[(ngModel)]="nombre">
+                            </div>
+                            <div class="col">
+                              <input type="text" class="form-control" placeholder="Telefono" name="telefono" [(ngModel)]="telefono">
+                            </div>
+                            <div class="col">
+                              <input type="text" class="form-control" placeholder="Correo"  name="correo" [(ngModel)]="correo">
+                            </div>
                           </div>
-                          <div class="col">
-                            <input type="text" class="form-control" placeholder="Numero identificacion"  name="numeroIdentificacion">
+                          <div class="row m-3">
+                            <div class="col">
+                              <input type="text" class="form-control" placeholder="Direccion"  name="direccion" [(ngModel)]="direccion">
+                            </div>
+                            <div class="col">
+                              <input type="text" class="form-control" placeholder="Numero identificacion"  name="numeroIdentificacion" [(ngModel)]="numeroIdentificacion">
+                            </div>
+                           <!--  <div class="row m-2 d-flex justify-content-center">
+                              <input type="button" value="Crear Cliente"  #btnCrearCliente class="w-50 btn btn-primary" >
+                          </div> -->
                           </div>
                         </div>
-                        <div class="row m-1 d-flex justify-content-center">
-                            <input type="button" value="Crear Factura" class="w-50 btn btn-success">
-                            <input class="m-1 mt-0 mb-0 btn btn-warning w-25"type="button" value="Borrador" >
+                       
+                        <div class="row m-5 d-flex justify-content-center" *ngIf="HabilitarBtnEnviarFactura">
+                            <input type="button" value="Crear Factura"  #btnCrearFactura class="w-50 btn btn-success" (click)="crearFactura()">
                         </div>
                       </form>
                 </div>
                 </div>
             <div class="d-flex justify-content-end">
-
             </div>
-
-           
           </div>
         </div>
-      
       </div>
-
 </section>    

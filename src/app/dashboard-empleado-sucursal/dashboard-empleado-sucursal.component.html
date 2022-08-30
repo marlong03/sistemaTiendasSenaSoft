@@ -1,13 +1,14 @@
 
 
   
-  <body (onload)="cambiarLista()">
+  <body >
     <header class="header">
       <div>
         <h1>INVENTARIO</h1>
       </div>
       <div>
-        <img src="../../assets/images/carrito-de-compras.png" (click)="abrirModal($event)"alt="">
+        <img src="../../assets/images/carrito-de-compras.png" (click)="abrirModal($event)"alt="" [(ngModel)]="btnCarrito" class="btnCarrito" [ngClass]="vibro">
+        <input type="button" class="btn btn-dark p-2 m-2" value="Cerrar Sesion" (click)="cerrarSesion()">
       </div>
     
     </header>
@@ -16,19 +17,18 @@
         <section class="section__left">
             <div class="container__profile">
               <img src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png" alt="">
-              <h5>Empleado sucursal </h5>
+              <h5>{{userLocalStorage.nombre}} </h5>
+
             </div>
             <div class="container__actions">
-              <input type="button" class="btn btn-warning"value="Categoria" >
-              <input type="button" value="Proveedores"  >
-              <input type="button" value="Productos" >
+              <input type="button" class="btn btn-warning"value="Ver Productos" >
             </div>
           </section>
 
         <section class="section__right">
             <div class="container__btns w-100 d-flex justify-content-center">
                 <div class="d-flex w-50">
-                    <input type="text" class="form-control w-50 p-1" placeholder="Filtrar por Nombre" name="palabraFiltrado" [(ngModel)]="palabraFiltrado"(keyup)="cambiarLista()">
+                  <p>Filtros aqui</p>
                 </div>
                <!--  <div class="d-flex w-50 justify-content-end">
                     <input type="button"  name ="borrar"class="btn btn-danger m-2 p-2"value="Borrar" >
@@ -42,30 +42,33 @@
                       <tr>
                         <th scope="col">Id</th>
                         <th scope="col">Nombre</th>
-                        <th scope="col">Cantidad</th>
                         <th scope="col">Categoria</th>
-                        <th scope="col">Proveedor</th>
+                        <!-- <th scope="col">Proveedor</th> -->
                         <th scope="col">Precio(Und)</th>
-                        <th scope="col">Precio total</th>
+                        <th scope="col">Cantidad</th>
+                        <th scope="col">Accion</th>
+
+                        <!-- <th scope="col">Precio total</th> -->
                       </tr>
                     </thead>
-                    <tbody class="tbody">
+                    <tbody class="tbody"  >
                         
-                      <tr *ngFor="let p of listaProductosMostrar">
-                        <td>{{p.id}}</td>
+                      <tr *ngFor="let p of listaProductos">
+                        <td >{{p.id}}</td>
                         <td>{{p.nombre}}</td>
-                        <td>{{p.cantidad}}</td>
                         <td>{{p.idCategoria.categoria}}</td>
-                        <td>{{p.idProveedor.nombre}}</td>
+                        <!--    <td>{{p.idProveedor.nombre}}</td> -->
                         <td>${{p.precioUnidad}}</td>
-                        <td>${{p.precioTotal}}</td>
+                        <!--  <td>${{p.precioTotal}}</td> -->
+                        <td>{{p.cantidad}}</td>
+                        <td (click)="seleccionarProductoProIdBtn($event)"><input type="buttton" value="Añadir a Factura" class="btn btn-success"></td>
                       </tr>
                     </tbody>
                   </table>
             </div>
         </section>
       </section>
-      <app-modal-factura [modalDisplay]="modalDisplay"></app-modal-factura>
+      <app-modal-factura [modalDisplay]="modalDisplay"(modalDisplayDashboard)="modalDisplay1" [listaProductosFactura] = "listaProductosEnFactura" ></app-modal-factura>
     </main>
     <footer>
     
