@@ -107,7 +107,7 @@
                           <!-- <td><input type="number" class="w-25" value=1 #ina (keyup)="getIna(ina.value)" ></td> -->
                           <td>{{p.idCategoria.categoria}}</td>
                           <td>${{p.precioUnidad}}</td>
-                          <td>${{multiplicarPrecioUndPorCantidad(p.precioUnidad,1)}}</td>
+                          <td>${{multiplicarPrecioUndPorCantidad(p.precioUnidad,p.cantidad)}}</td>
                          <!--  <td>revisar</td> -->
                         </tr>
                       

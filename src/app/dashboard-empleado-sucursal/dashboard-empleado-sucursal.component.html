@@ -37,7 +37,7 @@
                 </div> -->
             </div>
             <div class="container__table table-responsive " >
-                <table class="table table-sm">
+                <table id="tabla" datatable class="table table-sm">
                     <thead>
                       <tr>
                         <th scope="col">Id</th>
@@ -60,7 +60,7 @@
                         <!--    <td>{{p.idProveedor.nombre}}</td> -->
                         <td>${{p.precioUnidad}}</td>
                         <!--  <td>${{p.precioTotal}}</td> -->
-                        <td>{{p.cantidad}}</td>
+                        <td><input [defaultValue]="0" type="number" class="w-25 m-auto"(change)="obtenerValorIna2(ina2.value)" #ina2 placeholder="valor" ></td>
                         <td (click)="seleccionarProductoProIdBtn($event)"><input type="buttton" value="Añadir a Factura" class="btn btn-success"></td>
                       </tr>
                     </tbody>
@@ -68,7 +68,7 @@
             </div>
         </section>
       </section>
-      <app-modal-factura [modalDisplay]="modalDisplay"(modalDisplayDashboard)="modalDisplay1" [listaProductosFactura] = "listaProductosEnFactura" ></app-modal-factura>
+      <app-modal-factura  [modalDisplay]="modalDisplay"(modalDisplayDashboard)="modalDisplay1" [listaProductosFactura] = "listaProductosEnFactura" ></app-modal-factura>
     </main>
     <footer>
     

@@ -12,6 +12,7 @@ import { HomeComponent } from './home/home.component';
 import { ModalFacturaComponent } from './modal-factura/modal-factura.component';
 import { CrudCategoriasComponent } from './crud/crudCategorias/crudCategorias.component';
 import { CrudProveedoresComponent } from './crud/crudProveedores/crudProveedores.component';
+import { DataTablesModule } from 'angular-datatables';
 const routes:Routes = [
   
   {
@@ -48,7 +49,8 @@ const routes:Routes = [
     BrowserModule,
     HttpClientModule,
     FormsModule,
-    RouterModule.forRoot(routes)
+    RouterModule.forRoot(routes),
+    DataTablesModule
   ],
   exports:[RouterModule],
   providers: [],

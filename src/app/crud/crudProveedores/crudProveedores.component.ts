@@ -17,7 +17,12 @@ export class CrudProveedoresComponent implements OnInit {
 /* ------------------ */
   constructor(private Proveedorservice: ProveedorService ) { }
   ngOnInit(): void {
-    this.listaProveedors = this.Proveedorservice.getProveedors().subscribe((x:any)=>this.listaProveedors = x)
+    this.listaProveedors = this.Proveedorservice.getProveedors().subscribe((x:any)=>this.listaProveedors = x,
+    setTimeout(function(){
+      $('#tabla').DataTable({
+        responsive: true
+      });
+    },1000));
   }
 /* ------------------ */
   abrir = false; 

@@ -16,7 +16,14 @@ export class DashboardEmpleadoSucursalComponent implements OnInit {
   idSeleccionado:number;
   productoTraidoPorId:any;
   listaProductosEnFactura:any = [];
-  
+onana2:any; 
+  obtenerValorIna2(e:any){
+
+    console.log(e);
+    this.onana2 = e;
+    return e
+    
+  }
   abrirModal(e:any){
     /* console.log("aqui el 1");
     console.log(this.modalDisplay1); */
@@ -49,11 +56,27 @@ export class DashboardEmpleadoSucursalComponent implements OnInit {
 
   btnCarrito:any;
   seleccionarProductoProIdBtn(e:any){
+    console.log(this.listaProductos);
+    
     this.idSeleccionado = parseInt(e.path[2].childNodes[0].childNodes[0].data);
+    let cantidadIgualar = e;
+    console.log(e.path[2].childNodes[4].childNodes[0].defaultValue);
+
+    console.log(e);
+    
+    
     let productoNuevoEnFactura = this.listaProductos.filter((x:any)=> x.id === this.idSeleccionado );
     this.vibro = "btnCarritoVibrar"
+    let producto = productoNuevoEnFactura[0]
+    producto.cantidad =this.onana2;
+    console.log(this.listaProductosEnFactura);
+    for(let prod of this.listaProductosEnFactura){
 
-    this.añadirProductoFactura(productoNuevoEnFactura[0]);
+      if(producto.id == prod.id ){
+       /*  prod.cantidad = producto.cantidad; */
+      }
+      
+    }
     
   
     /*  this.btnCarrito */
@@ -75,9 +98,13 @@ export class DashboardEmpleadoSucursalComponent implements OnInit {
     this.listaProductosEnFactura.delete(producto);
     console.log(this.listaProductosEnFactura);
   }
-  constructor(private productoService: ProductoService,
+  constructor(private productoService:ProductoService,
               private router:Router) { }
   ngOnInit(): void {
-    this.listaProductos = this.productoService.getProductos().subscribe((x:any)=>this.listaProductos = x)
+    this.listaProductos = this.productoService.getProductos().subscribe((x:any)=>this.listaProductos = x,setTimeout(function(){
+      $('#tabla').DataTable({
+        responsive: true
+      });
+    },1000));
   }
 }

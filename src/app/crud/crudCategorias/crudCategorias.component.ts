@@ -1,4 +1,5 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, ViewChild } from '@angular/core';
+import { DataTableDirective } from 'angular-datatables';
 import { CategoriaService } from '../../servicios/categoria.service';
 @Component({
   selector: 'app-crud-categorias',
@@ -18,7 +19,12 @@ export class CrudCategoriasComponent implements OnInit {
 /* ------------------ */
   constructor(private Categoriaservice: CategoriaService ) { }
   ngOnInit(): void {
-    this.listaCategorias = this.Categoriaservice.getCategorias().subscribe((x:any)=>this.listaCategorias = x)
+    this.listaCategorias = this.Categoriaservice.getCategorias().subscribe((x:any)=>this.listaCategorias = x,
+    setTimeout(function(){
+      $('#tabla').DataTable({
+        responsive: true
+      });
+    },1000));
   }
 /* ------------------ */
   abrir = false; 

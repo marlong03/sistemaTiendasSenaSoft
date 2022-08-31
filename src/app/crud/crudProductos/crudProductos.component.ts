@@ -34,7 +34,12 @@ export class CrudProductosComponent implements OnInit {
               private bodegaProductoService: BodegaProductoService,
               ) { }
   ngOnInit(): void {
-    this.listaProductos = this.productoService.getProductos().subscribe((x:any)=>this.listaProductos = x)
+    this.listaProductos = this.productoService.getProductos().subscribe((x:any)=>this.listaProductos = x,
+    setTimeout(function(){
+      $('#tabla').DataTable({
+        responsive: true
+      });
+    },1000));
     this.ultimoIdProductoEnBD = this.getUltimoIdProductosService.getUltimoIdProductos().subscribe((x:any)=>this.ultimoIdProductoEnBD = x)
     this.listaCategorias = this.categoriaService.getCategorias().subscribe((x:any)=>this.listaCategorias = x)
     this.listaProveedores = this.proveedorService.getProveedors().subscribe((x:any)=>this.listaProveedores = x)

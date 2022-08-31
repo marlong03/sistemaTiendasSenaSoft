@@ -38,23 +38,23 @@ export class ModalFacturaComponent implements OnInit {
  sacarTotal(){
   let precio:number = 0;
     precio = this.listaProductosFactura.map((x:any)=>{
-      console.log(x.precioUnidad);
+     /*  console.log(x.precioUnidad); */
       
-     return x.precioUnidad
+     return x.precioUnidad * x.cantidad
     }).reduce((count:number,x:any)=> count + x,0)
-    console.log("qqqqqqqqqqq");
+   /*  console.log("qqqqqqqqqqq"); */
     
-    console.log(precio);
+   /*  console.log(precio); */
     this.precioTotal = precio;
     /* return precio  */
  }
   multiplicarPrecioUndPorCantidad(preciound:any,cantidad:any ){
     this.sacarTotal()
-    console.log(preciound+"* " + cantidad + "="+parseInt(preciound) * parseInt(cantidad));
+    /* console.log(preciound+"* " + cantidad + "="+parseInt(preciound) * parseInt(cantidad)); */
   /* let valorTotal = 0;  */   
   let valorTotal:any =  parseInt(preciound) * parseInt(cantidad);
-  console.log("resultado = "+ valorTotal);
-  console.log("precioTotal antes" + this.precioTotal);
+  /* console.log("resultado = "+ valorTotal);
+  console.log("precioTotal antes" + this.precioTotal); */
  /*  this.precioTotalAntes = this.precioTotal
   this.precioTotal+=valorTotal;    */
    /*  console.log("precioTotal despues" + this.precioTotal);
@@ -83,12 +83,12 @@ export class ModalFacturaComponent implements OnInit {
   }
   abrirModal(e:any){
     this.modalDisplay = 'block';
-    console.log( this.modalDisplay);
-    console.log(this.listaProductosFactura);
+    /* console.log( this.modalDisplay);
+    console.log(this.listaProductosFactura); */
     
     }
     getInputValue(a:any){
-      console.log(a.value);
+      /* console.log(a.value); */
       return a.value;   
      }
   cerrarDisplay(){
@@ -228,8 +228,8 @@ export class ModalFacturaComponent implements OnInit {
       for(let i of this.listaProductosFactura){
         let data = {
           "id":0,
-          "cantidad":0,
-          "precio":i.precio,
+          "cantidad":parseInt(i.cantidad),
+          "precio":parseInt(i.precio),
           "idFactura":{
               "id":ultimoIdFacturas
           },
@@ -269,7 +269,7 @@ export class ModalFacturaComponent implements OnInit {
       if(idClienteFactura != null){
         let data = {
           id:0,
-          total:0,
+          total:this.precioTotal,
           idCliente:{
             id:parseInt(idClienteFactura) 
           },
