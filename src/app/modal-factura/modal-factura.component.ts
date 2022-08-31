@@ -1,4 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Router } from '@angular/router';
+import Swal from 'sweetalert2';
 import { ClienteService } from '../servicios/cliente.service';
 import { DetalleFacturaService } from '../servicios/detalleFactura.service';
 import { FacturaService } from '../servicios/factura.service';
@@ -30,7 +32,7 @@ export class ModalFacturaComponent implements OnInit {
       
     }
   }
-  precioTotal:number = 0;
+  precioTotal:any = 0;
   precioTotalAntes:number = 0;
   listaValoresTotales:any = []; 
  /*  valorTotal:number; */
@@ -76,7 +78,7 @@ export class ModalFacturaComponent implements OnInit {
       this.precioTotal
       );
       console.log(this.listaValoresTotales); */
-      return ina.value;
+      return parseInt(ina.value);
   }
   getPrecioTotal(){
     return this.precioTotal;
@@ -89,7 +91,7 @@ export class ModalFacturaComponent implements OnInit {
     }
     getInputValue(a:any){
       /* console.log(a.value); */
-      return a.value;   
+      return parseInt(a.value);   
      }
   cerrarDisplay(){
     this.modalDisplay = 'none';
@@ -170,9 +172,22 @@ export class ModalFacturaComponent implements OnInit {
         this.crearCliente()
         this.EnviarFactura()
         this.enviarDetallesFactura()
+        Swal.fire(
+          '¡Has creado una factura!',
+          'Click para regresar',
+          'success'
+        )
+
       }else{
         this.EnviarFactura()
         this.enviarDetallesFactura()
+        Swal.fire(
+          '¡Has creado una factura!',
+          'Click para regresar',
+          'success'
+        ).then((x:any)=>{
+          window.location.reload()
+        })
 
       }
     }
@@ -229,9 +244,9 @@ export class ModalFacturaComponent implements OnInit {
         let data = {
           "id":0,
           "cantidad":parseInt(i.cantidad),
-          "precio":parseInt(i.precio),
+          "precio":parseInt(i.precioUnidad) * parseInt(i.cantidad),
           "idFactura":{
-              "id":ultimoIdFacturas
+              "id":ultimoIdFacturas+1
           },
           "idProducto":{
               "id":i.id
@@ -246,7 +261,6 @@ export class ModalFacturaComponent implements OnInit {
       }catch(err){
         console.log("NO SE PUDO ENVIAR CON ARRDATA");
         console.log(err);
-        
       }
         })
       
@@ -269,7 +283,7 @@ export class ModalFacturaComponent implements OnInit {
       if(idClienteFactura != null){
         let data = {
           id:0,
-          total:this.precioTotal,
+          total:parseInt(this.precioTotal),
           idCliente:{
             id:parseInt(idClienteFactura) 
           },
@@ -298,7 +312,8 @@ export class ModalFacturaComponent implements OnInit {
   constructor(private clienteService:ClienteService,
               private sucursalService:Sucursaleservice,
               private facturaService:FacturaService,
-              private detalleFacturaService:DetalleFacturaService) { }
+              private detalleFacturaService:DetalleFacturaService,
+              private router:Router) { }
 
   ngOnInit(): void {
     /* this.listaClientes = */

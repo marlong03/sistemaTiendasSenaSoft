@@ -13,6 +13,7 @@ import { ModalFacturaComponent } from './modal-factura/modal-factura.component';
 import { CrudCategoriasComponent } from './crud/crudCategorias/crudCategorias.component';
 import { CrudProveedoresComponent } from './crud/crudProveedores/crudProveedores.component';
 import { DataTablesModule } from 'angular-datatables';
+import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
 const routes:Routes = [
   
   {
@@ -50,7 +51,8 @@ const routes:Routes = [
     HttpClientModule,
     FormsModule,
     RouterModule.forRoot(routes),
-    DataTablesModule
+    DataTablesModule,
+    SweetAlert2Module
   ],
   exports:[RouterModule],
   providers: [],

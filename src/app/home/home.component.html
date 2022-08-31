@@ -4,21 +4,32 @@
     border-radius: 100%;
     }
     .container__login--top{
-      height: 80vh;
+      height: 100%;
     }
     .container__text{
-      background:url("../assets/images/fondo1.jpg");
+      background:#03092164 url("../assets/images/fondo1.jpg");
       background-repeat: none;
       background-size: cover;
       background-position: 50%;
+      background-blend-mode: darken;
+      color:white;
     }
     .box_shadow{
-      box-shadow: 0px 0px 20px #737373;
+      box-shadow: 0px 0px 20px #3b3b3b;
     }
+    .bg-image{
+  background: rgba(0, 0, 0, 0.447) url(../../assets/images/ropa-fondo-2.jpg);
+  background-repeat: none;
+  background-size: contain;
+  background-blend-mode: darken;
+} 
+.sect{
+  height: 100vh;
+}
     </style>
-    <section class="bg-light h-100 d-flex justify-content-center" >
+    <section class=" h-100 d-flex justify-content-center bg-image" >
     
-    <section class="d-flex justify-content-center w-75 p-5 ">
+    <section class=" sect d-flex justify-content-center w-75 p-5 ">
       <div class="w-50 container__text box_shadow">
         <div class="d-flex flex-column justify-content-center p-5 ">
           <h1>Inicio Sesión </h1>

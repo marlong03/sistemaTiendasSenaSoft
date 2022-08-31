@@ -34,10 +34,10 @@
   text-align: center;
 }
 .container__profile img{
-  width: 70px;
+  width: 65px;
   border-radius: 100%;
-  margin-bottom:20px;
-  border: 3px solid black;
+  margin-bottom:10px;
+  border: 3px solid #5e5e5e;
 
 }
 .container__actions{
@@ -58,11 +58,12 @@
 
 
 .btnCarrito{
-  width: 35px;
+  width: 40px;
   cursor: pointer;
-  background-color: #ededed;
+  background-color: #198754;
+  border:2px solid white;
   padding:5px;
-  border-radius: 10px;
+  border-radius: 7px;
 }
 .btnCarritoVibrar{
     animation: vibrar .4s;
@@ -111,7 +112,7 @@
 
 }
 .container__table{
-    padding:30px
+    padding:15px
 }
 
 .tbody tr:hover{

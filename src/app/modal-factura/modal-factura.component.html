@@ -35,7 +35,7 @@
 
 /* Modal Content */
 .modal-content {
-  background-color: #fefefe;
+  background-color: #f7faff;
   margin: auto;
   padding: 20px;
   border: 1px solid #888;
@@ -64,10 +64,11 @@
     border: 3px solid #4180d8;
     background-color: #4180d8;
 }
+
     
 </style>
 
-<section>
+<section >
     
     <div class="container__btns">
        <!--  <div>
@@ -95,7 +96,7 @@
                     <thead>
                       <tr>
                         <th scope="col">Nombre</th>
-                       <!--  <th scope="col">Cantidad</th> -->
+                        <th scope="col">Cantidad</th>
                         <th scope="col">Categoria</th>
                         <th scope="col">Precio(Und)</th>
                         <th scope="col">Precio total</th>
@@ -104,7 +105,7 @@
                     <tbody class="tbody" >
                       <tr *ngFor="let p of listaProductosFactura">
                           <td>{{p.nombre}}</td>
-                          <!-- <td><input type="number" class="w-25" value=1 #ina (keyup)="getIna(ina.value)" ></td> -->
+                          <td>{{p.cantidad}}</td>
                           <td>{{p.idCategoria.categoria}}</td>
                           <td>${{p.precioUnidad}}</td>
                           <td>${{multiplicarPrecioUndPorCantidad(p.precioUnidad,p.cantidad)}}</td>
@@ -116,7 +117,7 @@
                         <tr>
                             <td></td>
                             <td></td>
-                           <!--  <td></td> -->
+                            <td></td>
                             <td>Total:</td>
                             <td>${{precioTotal}}</td>
                         </tr>

@@ -5,6 +5,7 @@ import { ProveedorService } from 'src/app/servicios/proveedor.service';
 import { ProductoService } from '../../servicios/producto.service';
 import { BodegaProductoService } from '../../servicios/bodegaProducto.service';
 import { ThisReceiver } from '@angular/compiler';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-crud-productos',
@@ -39,7 +40,7 @@ export class CrudProductosComponent implements OnInit {
       $('#tabla').DataTable({
         responsive: true
       });
-    },1000));
+    },1000)); 
     this.ultimoIdProductoEnBD = this.getUltimoIdProductosService.getUltimoIdProductos().subscribe((x:any)=>this.ultimoIdProductoEnBD = x)
     this.listaCategorias = this.categoriaService.getCategorias().subscribe((x:any)=>this.listaCategorias = x)
     this.listaProveedores = this.proveedorService.getProveedors().subscribe((x:any)=>this.listaProveedores = x)
@@ -182,6 +183,14 @@ guardarProducto(){
     console.log(this.ultimoIdProductoEnBD);
     this.bodegaProductoService.postBodegaProducto(dataBodegaProducto)
     console.log("data enviada");
+    Swal.fire(
+      '¡Has creado un nuevo Producto!',
+      'Click para regresar',
+      'success'
+    ).then((x:any)=>{
+      window.location.reload()
+     /* this.ngOnInit() */
+    })
   } catch (error) {
     console.log("no enviado");
     console.log(error);
@@ -229,6 +238,14 @@ guardarProducto(){
 
     this.bodegaProductoService.postBodegaProducto(dataBodegaProducto)
       console.log("data enviada y actualizada");
+      Swal.fire(
+        '¡Has creado un nuevo Producto!',
+        'Click para regresar',
+        'success'
+      ).then((x:any)=>{
+        window.location.reload()
+       /* this.ngOnInit() */
+      })
     } catch (error) {
       console.log("no enviado");
       console.log(error);

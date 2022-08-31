@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import Swal from 'sweetalert2';
 import { ProductoService } from '../servicios/producto.service';
 
 @Component({
@@ -16,12 +17,12 @@ export class DashboardEmpleadoSucursalComponent implements OnInit {
   idSeleccionado:number;
   productoTraidoPorId:any;
   listaProductosEnFactura:any = [];
-onana2:any; 
+onana2:any = 1; 
   obtenerValorIna2(e:any){
 
     console.log(e);
-    this.onana2 = e;
-    return e
+    this.onana2 = parseInt(e);
+    return parseInt(e)
     
   }
   abrirModal(e:any){
@@ -35,7 +36,7 @@ onana2:any;
 
       this.modalDisplay = 'block';
     }
-    console.log(this.modalDisplay);
+  /*   console.log(this.modalDisplay); */
   }
   cerrarModal(){
     this.modalDisplay = "none";
@@ -56,27 +57,44 @@ onana2:any;
 
   btnCarrito:any;
   seleccionarProductoProIdBtn(e:any){
-    console.log(this.listaProductos);
+    /* console.log(this.listaProductosEnFactura); */
     
     this.idSeleccionado = parseInt(e.path[2].childNodes[0].childNodes[0].data);
     let cantidadIgualar = e;
     console.log(e.path[2].childNodes[4].childNodes[0].defaultValue);
 
-    console.log(e);
+    /* console.log(e); */
     
     
-    let productoNuevoEnFactura = this.listaProductos.filter((x:any)=> x.id === this.idSeleccionado );
+    let productoNuevoEnFactura = this.listaProductos.filter((x:any)=> x.id == this.idSeleccionado );
     this.vibro = "btnCarritoVibrar"
     let producto = productoNuevoEnFactura[0]
     producto.cantidad =this.onana2;
-    console.log(this.listaProductosEnFactura);
-    for(let prod of this.listaProductosEnFactura){
+    console.log(this.listaProductosEnFactura); 
+   /*  for(let prod of this.listaProductosEnFactura){
 
-      if(producto.id == prod.id ){
+      /* if(producto.id == prod.id ){
+        prod.cantidad = producto.cantidad */
        /*  prod.cantidad = producto.cantidad; */
-      }
+  /*     } */
+        let existeEnListaProductosFactura = this.listaProductosEnFactura.filter((e:any) => {
+            if(producto.id == e.id){
+             e.cantidad = parseInt(e.cantidad)
+              e.cantidad = parseInt(this.onana2); 
+              return e
+            }
+        });
+        if(existeEnListaProductosFactura.length <= 0 ){
+          /* no exite */
+          this.añadirProductoFactura(producto)
+
+        }
+      console.log("cambios aqui");
+      console.log(this.listaProductosEnFactura);
       
-    }
+      
+      
+    /* } */
     
   
     /*  this.btnCarrito */

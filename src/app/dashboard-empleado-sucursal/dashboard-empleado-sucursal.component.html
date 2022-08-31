@@ -4,10 +4,10 @@
   <body >
     <header class="header">
       <div>
-        <h1>INVENTARIO</h1>
+        <h1>FACTURACION</h1>
       </div>
       <div>
-        <img src="../../assets/images/carrito-de-compras.png" (click)="abrirModal($event)"alt="" [(ngModel)]="btnCarrito" class="btnCarrito" [ngClass]="vibro">
+        <img src="../../assets/images/factura.png" (click)="abrirModal($event)"alt="" [(ngModel)]="btnCarrito" class="btnCarrito" [ngClass]="vibro">
         <input type="button" class="btn btn-dark p-2 m-2" value="Cerrar Sesion" (click)="cerrarSesion()">
       </div>
     
@@ -18,6 +18,7 @@
             <div class="container__profile">
               <img src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png" alt="">
               <h5>{{userLocalStorage.nombre}} </h5>
+              <small class="text-primary">Empleado Sucursal</small>
 
             </div>
             <div class="container__actions">
@@ -26,9 +27,9 @@
           </section>
 
         <section class="section__right">
-            <div class="container__btns w-100 d-flex justify-content-center">
+            <div class="container__btns w-100 p-2 d-flex justify-content-center">
                 <div class="d-flex w-50">
-                  <p>Filtros aqui</p>
+                  
                 </div>
                <!--  <div class="d-flex w-50 justify-content-end">
                     <input type="button"  name ="borrar"class="btn btn-danger m-2 p-2"value="Borrar" >
@@ -36,7 +37,7 @@
                     <input type="button"  class="btn btn-success m-2 p-2"value="Añadir" >
                 </div> -->
             </div>
-            <div class="container__table table-responsive " >
+            <div class="container__table table-responsive  " >
                 <table id="tabla" datatable class="table table-sm">
                     <thead>
                       <tr>
@@ -60,7 +61,7 @@
                         <!--    <td>{{p.idProveedor.nombre}}</td> -->
                         <td>${{p.precioUnidad}}</td>
                         <!--  <td>${{p.precioTotal}}</td> -->
-                        <td><input [defaultValue]="0" type="number" class="w-25 m-auto"(change)="obtenerValorIna2(ina2.value)" #ina2 placeholder="valor" ></td>
+                        <td><input  type="number" class="w-50 m-auto"(change)="obtenerValorIna2(ina2.value)" #ina2 placeholder="1"  ></td>
                         <td (click)="seleccionarProductoProIdBtn($event)"><input type="buttton" value="Añadir a Factura" class="btn btn-success"></td>
                       </tr>
                     </tbody>
